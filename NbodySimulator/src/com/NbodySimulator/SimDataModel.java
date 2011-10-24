@@ -12,7 +12,7 @@ import android.os.Environment;
 import android.util.Log;
 
 public class SimDataModel {
-	private final static String LOGDIR = Environment.getExternalStorageDirectory().getPath() + "/kimuchi1203/";
+	private final static String LOGDIR = Environment.getExternalStorageDirectory().getPath() + "/NbodySimulator/";
 	private String dataFile = LOGDIR + "data.txt";
 	static final int NUM_P = 5;
 	private int num_p;
