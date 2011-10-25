@@ -33,7 +33,7 @@ public class NbodySimulatorActivity extends Activity {
 				handler.post(this);
 			}
 		};
-        
+
         setContentView(R.layout.main);
         start_button = (Button)findViewById(R.id.start_button);
         start_button.setOnClickListener(new View.OnClickListener() {

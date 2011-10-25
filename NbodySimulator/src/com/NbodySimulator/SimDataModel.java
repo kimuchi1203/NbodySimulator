@@ -45,7 +45,7 @@ public class SimDataModel {
 		tmp_a3 = new double[NUM_P*(NUM_P-1)*3];
 		footprint = new float[NUM_P*LEN_FOOTPRINT*2];//only 2D position.
 		indexes = new int[NUM_P*3];
-		reset();//readData();//for Release
+		readData();
 	}
 	public void reset() {
 		dt = 1.0; k = 1.0; num_p = NUM_P; showFootprint=false; len_footprint = +LEN_FOOTPRINT; intervalFootprint = 20;
@@ -232,6 +232,10 @@ public class SimDataModel {
 	public void writeData(){
 		String fileName = dataFile;
 		FileWriter writer = null;
+		File dir = new File(LOGDIR);
+		if(!dir.exists()){
+			dir.mkdirs();
+		}
 		File fl = new File(fileName);
 		try {
 			if(!fl.exists()){
@@ -242,6 +246,7 @@ public class SimDataModel {
 			e.printStackTrace();
 		}
 		BufferedWriter bw = new BufferedWriter(writer);
+
 		String line = null;
 		try {
 			line = ""+dt+" "+k+" "+num_p+" "+len_footprint+" "+intervalFootprint;
