@@ -12,9 +12,10 @@ import android.os.Environment;
 import android.util.Log;
 
 public class SimDataModel {
+	private final static boolean FLAG_LOG = false;
 	private final static String LOGDIR = Environment.getExternalStorageDirectory().getPath() + "/NbodySimulator/";
 	private String dataFile = LOGDIR + "data.txt";
-	static final int NUM_P = 5;
+	private static final int NUM_P = 5;
 	private int num_p;
 	private double dt;
 	private double k;
@@ -30,7 +31,7 @@ public class SimDataModel {
 	private boolean showFootprint;
 	private int indexFootprint = 0;
 	private int len_footprint;
-	static final int LEN_FOOTPRINT = 1000;
+	private static final int LEN_FOOTPRINT = 1000;
 	private int intervalFootprint;
 	private int[] indexes;
 
@@ -103,7 +104,7 @@ public class SimDataModel {
 			for(int j=i+1;j<num_p;++j){
 				r2 = range2(i,j);
 				r = Math.sqrt(r2);
-				//Log.i("debug","range2 "+r2+" range "+r);
+				if(FLAG_LOG) Log.i("debug","range2 "+r2+" range "+r);
 				tmpF = k/r2;
 				tmpFx[0] = tmpF*(x3[i*3+0]-x3[j*3+0])/r;
 				tmpFx[1] = tmpF*(x3[i*3+1]-x3[j*3+1])/r;
@@ -150,7 +151,7 @@ public class SimDataModel {
 			posi[0] = 0.0; nega[0] = 0.0;
 			posi[1] = 0.0; nega[1] = 0.0;
 			posi[2] = 0.0; nega[2] = 0.0;
-			//Log.i("accel","i: "+i+" "+a3[i*3+0]+" "+a3[i*3+1]+" "+a3[i*3+2]);
+			if(FLAG_LOG) Log.i("accel","i: "+i+" "+a3[i*3+0]+" "+a3[i*3+1]+" "+a3[i*3+2]);
 		}
 	}
 	private void sortTmp_a3(int[] indexes) {
@@ -250,13 +251,13 @@ public class SimDataModel {
 		String line = null;
 		try {
 			line = ""+dt+" "+k+" "+num_p+" "+len_footprint+" "+intervalFootprint;
-			Log.i("write",line);
+			if(FLAG_LOG) Log.i("write",line);
 			bw.write(line);
 			bw.newLine();
 
 			for(int i=0;i<num_p;++i){
 				line = mass[i]+" "+x3[i*3+0]+" "+x3[i*3+1]+" "+x3[i*3+2]+" "+v3[i*3+0]+" "+v3[i*3+1]+" "+v3[i*3+2]+" "+color[i]+" "+shape[i];
-				Log.i("write",line);
+				if(FLAG_LOG) Log.i("write",line);
 				bw.write(line);
 				bw.newLine();
 			}
@@ -300,7 +301,7 @@ public class SimDataModel {
 				a3[i*3+0] = 0.0;
 				a3[i*3+1] = 0.0;
 				a3[i*3+2] = 0.0;
-				Log.i("pos",""+x3[i*3+0]+" "+x3[i*3+1]+","+x3[i*3+2]);
+				if(FLAG_LOG) Log.i("pos",""+x3[i*3+0]+" "+x3[i*3+1]+","+x3[i*3+2]);
 				color[i] = strAry[7].toString();
 				shape[i] = strAry[8].toString();
 			}
